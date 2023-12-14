@@ -177,13 +177,13 @@ _package-headers() {
   while read -rd '' file; do
     case "$(file -Sib "$file")" in
       application/x-sharedlib\;*)      # Libraries (.so)
-        aarch64-linux-gnu-strip -v ${STRIP_SHARED} "$file" ;;
+        strip -v ${STRIP_SHARED} "$file" ;;
       application/x-archive\;*)        # Libraries (.a)
-        aarch64-linux-gnu-strip -v ${STRIP_STATIC} "$file" ;;
+        strip -v ${STRIP_STATIC} "$file" ;;
       application/x-executable\;*)     # Binaries
-        aarch64-linux-gnu-strip -v ${STRIP_BINARIES} "$file" ;;
+        strip -v ${STRIP_BINARIES} "$file" ;;
       application/x-pie-executable\;*) # Relocatable binaries
-        aarch64-linux-gnu-strip -v ${STRIP_SHARED} "$file" ;;
+        strip -v ${STRIP_SHARED} "$file" ;;
     esac
   done < <(find "${_builddir}" -type f -perm -u+x ! -name vmlinux -print0)
 
