@@ -64,7 +64,7 @@ build() {
   # Only need normal Image, as most Rockchip devices does not need/support Image.gz
   # Image and modules are built in the same run to make sure they're compatible with each other
   # -@ enables symbols in dtbs, so overlay is possible
-  make -j $(nproc) ${MAKEFLAGS} DTC_FLAGS="-@" Image modules dtbs
+  make -j8 ${MAKEFLAGS} DTC_FLAGS="-@" Image modules dtbs
 }
 
 _package() {
