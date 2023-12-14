@@ -53,8 +53,6 @@ prepare() {
 build() {
   export ARCH="arm64"
   export CROSS_COMPILE="aarch64-linux-gnu-"
-  export CFLAGS="-Wno-error"
-  export CXXFLAGS="-Wno-error"
   cd "${_srcname}"
 
   # get kernel version, which will be used later for modules
@@ -175,6 +173,8 @@ _package-headers() {
   find "${_builddir}" -type f -name '*.o' -printf 'Removing %P\n' -delete
 
   echo "Stripping build tools..."
+  CROSS_COMPILE="aarch64-arch-linux-"
+  alias strip="${CROSS_COMPILE}strip"
   local file
   while read -rd '' file; do
     case "$(file -Sib "$file")" in
