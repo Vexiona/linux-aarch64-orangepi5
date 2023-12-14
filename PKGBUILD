@@ -173,24 +173,22 @@ _package-headers() {
   find "${_builddir}" -type f -name '*.o' -printf 'Removing %P\n' -delete
 
   echo "Stripping build tools..."
-  CROSS_COMPILE="aarch64-arch-linux-"
-  alias strip="${CROSS_COMPILE}strip"
   local file
   while read -rd '' file; do
     case "$(file -Sib "$file")" in
       application/x-sharedlib\;*)      # Libraries (.so)
-        strip -v ${STRIP_SHARED} "$file" ;;
+        aarch64-linux-gnu-strip -v ${STRIP_SHARED} "$file" ;;
       application/x-archive\;*)        # Libraries (.a)
-        strip -v ${STRIP_STATIC} "$file" ;;
+        aarch64-linux-gnu-strip -v ${STRIP_STATIC} "$file" ;;
       application/x-executable\;*)     # Binaries
-        strip -v ${STRIP_BINARIES} "$file" ;;
+        aarch64-linux-gnu-strip -v ${STRIP_BINARIES} "$file" ;;
       application/x-pie-executable\;*) # Relocatable binaries
-        strip -v ${STRIP_SHARED} "$file" ;;
+        aarch64-linux-gnu-strip -v ${STRIP_SHARED} "$file" ;;
     esac
   done < <(find "${_builddir}" -type f -perm -u+x ! -name vmlinux -print0)
 
   echo "Stripping vmlinux..."
-  strip -v $STRIP_STATIC "${_builddir}/vmlinux"
+  aarch64-linux-gnu-strip -v $STRIP_STATIC "${_builddir}/vmlinux"
 
   echo "Adding symlink..."
   mkdir -p "${pkgdir}/usr/src"
