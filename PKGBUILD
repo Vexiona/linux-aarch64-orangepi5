@@ -51,6 +51,8 @@ prepare() {
 }
 
 build() {
+  export ARCH="arm64"
+  export CROSS_COMPILE="aarch64-arch-linux-"
   cd "${_srcname}"
 
   # get kernel version, which will be used later for modules
