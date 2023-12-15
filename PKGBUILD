@@ -18,7 +18,7 @@ arch=('aarch64')
 url="https://github.com/orangepi-xunlong/${_orangepi_repo}"
 license=('GPL2')
 makedepends=( # Since we don't build the doc, most of the makedeps for other linux packages are not needed here
-  'kmod' 'bc' 'dtc' 'uboot-tools'
+  'kmod' 'bc' 'dtc' 'uboot-tools' 'python'
 )
 options=(!strip !distcc)
 _sha256_gcc12_fixups_patch='e9c720fa4dba291f3a87a04eb9245fcf99cd0c4164d2c5deefe7ca35eedf1960'
